@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0">  -->
+    <title>Document</title>
+    <link th:href="@{/css/admin.css}" rel="stylesheet">
+    <script th:src="@{/javascript/admin.js}"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-bar">
+            <h1>Student List</h1>
+            <a href="#">Account</a>
+            <a href="#">Data</a>
+            <a href="#">Contact</a>
+            <a href="#">Help</a>
+        </div>
+    </div>
+    <button class="add">+</button>
+    <div>
+        <table>
+            <thead>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Branch</th>
+                <th>Year</th>
+                <th>Action</th>
+            </thead>
+            <tr th:each="student : ${students}">
+                <td th:text="${student.id}"></td>
+                <td th:text="${student.name}"></td>
+                <td th:text="${student.email}"></td>
+                <td th:text="${student.branch}"></td>
+                <td th:text="${student.year}"></td>
+                <td> 
+                    <button class="update but">update</button>
+                    <button class="delete but">delete</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+                <h2>Add Details</h2>
+                <button class="close">X</button>
+            <form th:action="@{/admin/add}" th:method="post">
+                <div class="input-container">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" placeholder="Enter name">
+                </div>
+                <div class="input-container">
+                    <label for="email">Email:</label>
+                    <input type="text" id="email" name="email" placeholder="Enter email">
+                </div>
+                <div class="input-container">
+                    <label for="branch">Branch:</label>
+                    <input type="text" id="branch" name="branch" placeholder="Enter branch">
+                </div>
+                <div class="input-container">
+                    <label for="year">Year:</label>
+                    <input type="number" id="year" name="year" placeholder="Enter year">
+                </div>
+                <div class="button-container">
+                    <button class="save" type="submit">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
