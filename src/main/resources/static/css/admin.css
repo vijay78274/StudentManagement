@@ -5,6 +5,9 @@ body{
 /* h1{
     text-align: center;
 } */
+.container{
+    margin-bottom: 20px;
+}
 th,td{
     text-align: center;
     border: 1px solid black;

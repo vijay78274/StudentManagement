@@ -1,0 +1,120 @@
+/* Reset margin and padding for all elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f4f4f4;
+}
+
+/* Center the main container */
+.main_container {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    place-items: center;
+}
+
+/* Style the login container */
+.login_container {
+    width: 55%;
+    max-width: 900px;
+    height: 70%;
+    max-height: 600px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Left section styling */
+.login_msg {
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    text-align: center;
+    width: 50%;
+    height: 100%;
+    background-color: #0073e6;
+    color: white;
+    border-radius: 10px;
+}
+
+.login_msg h1 {
+    font-size: 2rem;
+    text-align: center;
+}
+.login_msg h3 {
+    margin: 5px;
+    text-align: center;
+}
+
+/* Right section styling */
+.login_data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 50%;
+    border-radius: 10px;
+}
+.login_data form{
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* Input fields */
+.login_data input {
+    width: 90%;
+    height: 40px;
+    margin-bottom: 10px;
+    padding: 5px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Login button */
+.login {
+    color: white;
+    font-size: 1.2rem;
+    background-color: #0073e6;
+    height: 40px;
+    width: 90%;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login:hover {
+    background-color: #005bb5;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .login_container {
+        flex-direction: column;
+        width: 90%;
+        height: auto;
+    }
+
+    .login_msg, .login_data {
+        width: 90%;
+        height: auto;
+    }
+}

@@ -2,19 +2,30 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Login</title>
+    <link th:href="@{/css/login.css}" rel="stylesheet">
+    <script th:src="@{/javascript/login.js}"></script>
 </head>
 <body>
-    <h1>Login</h1>
-    <form th:action="@{/login}" method="post">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
-        <br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        <br>
-        <button type="submit">Login</button>
-    </form>
-    <p th:if="${param.error}">Invalid username or password</p>
-    <p th:if="${param.logout}">You have been logged out</p>
+    <div class="main_container">
+        <div class="login_container">
+            <div class="login_msg">
+                <h1>Welcome back Log in</h1>
+                <h3>Student details and student management</h3>
+            </div>
+            <div class="login_data">
+                <form class="form" th:action="@{/perform_login}" method="post">
+                    <input id="email" type="text" name="username" placeholder="username" required>
+                    <input id="password" type="password" name="password" placeholder="password" required>
+                    <button class="login" type="submit">LogIn</button>
+                </form>
+                <div th:if="${param.error}" style="color: red;">
+                    Invalid username or password.
+                </div>
+                <div th:if="${param.logout}" style="color: green;">
+                    You have been logged out successfully.
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

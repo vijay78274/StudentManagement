@@ -18,10 +18,15 @@ public class MyUserDeatilsService implements UserDetailsService{
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.println("Attempting to load user: " + username);
+        if(username.isEmpty()||username==null){
+            System.out.println("username is empty");
+        }
         Users user = repository.findByName(username);
-        if(user==null){
+        if(username.isEmpty()||username==null){
             throw new UsernameNotFoundException("user not found");
         }
+        System.out.println("User found: " + user.getName());
         return new MyUserDetails(user);
     }
 

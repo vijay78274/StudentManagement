@@ -17,21 +17,14 @@ public class MyUserDetails implements UserDetails{
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // TODO Auto-generated method stub
-        // ArrayList<String> list = new ArrayList<>();
-        // list.add("STUDENT");
-        // list.add("ADMIN");
-        // return new GrantedAuthority(list);
-
-        ArrayList<GrantedAuthority> roles = new ArrayList<GrantedAuthority>();
-        
+        ArrayList<GrantedAuthority> roles = new ArrayList<GrantedAuthority>();     
         SimpleGrantedAuthority role1 = new SimpleGrantedAuthority("USER");
-        SimpleGrantedAuthority role2 = new SimpleGrantedAuthority("ADMIN");
-        
+        SimpleGrantedAuthority role2 = new SimpleGrantedAuthority("ADMIN");    
         roles.add(role1);
         roles.add(role2);
         return roles;
     }
+
 
     @Override
     public String getPassword() {
