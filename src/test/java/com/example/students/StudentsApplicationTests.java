@@ -4,22 +4,22 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.example.students.Models.Student;
 import com.example.students.Models.Users;
+import com.example.students.Repository.StudentRepository;
 import com.example.students.Repository.UserRepository;
 import com.example.students.Services.StudentService;
+import com.example.students.Services.UserService;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -30,7 +30,10 @@ class StudentsApplicationTests {
     private MockMvc mockMvc;
 	@Autowired
 	private UserRepository userRepository;
-
+	@Autowired
+	private UserService service2;
+	@Autowired
+	private StudentRepository repository;
 	@Test
 	void contextLoads() {
 	}
@@ -49,6 +52,7 @@ class StudentsApplicationTests {
 		// service2.save(user);
 		mockMvc.perform(post("/admin/user")
 				.param("name", "Gopal Singh")
+				.param("email","singh.gopal.@gmail.com")
 				.param("rawPassword", "Gopal@123")
                 .param("role", "ADMIN")
             	.contentType("application/x-www-form-urlencoded"))
@@ -56,6 +60,21 @@ class StudentsApplicationTests {
                 .andExpect(jsonPath("$.name").value("Gopal Singh"))
                 .andExpect(jsonPath("$.role").value("ADMIN"));
 	}
+	// @Test
+	// void updateUser() throws Exception{
+	// 	// Users user = new Users("Vijay Singh","Vijay@123","ADMIN");
+	// 	// service2.save(user);
+	// 	mockMvc.perform(put("/admin/update")
+	// 			.param("id",1L)
+	// 			.param("name", "John jones")
+	// 			.param("email","jones.john.@gmail.com")
+    //             .param("branch","CSE")
+	// 			.param("year",3)
+	// 			.contentType("application/x-www-form-urlencoded"))
+    //             .andExpect(status().isOk())
+    //             .andExpect(jsonPath("$.name").value("Gopal Singh"))
+    //             .andExpect(jsonPath("$.role").value("ADMIN"));
+	// }
 	@Test
 void loadbyUser() {
     Users foundUser = userRepository.findByName("Gopal Singh");
@@ -77,4 +96,14 @@ void loadbyUser() {
 // 	System.out.println(user);
 // }
 
+	@Test
+	public void updateStudent(){
+		Student student = repository.findById(4L)
+                .orElseThrow(() -> new RuntimeException("Student not found"));
+		System.out.println(student.getName()+" "+student.getBranch()+" "+student.getEmail());
+		student.setName("Shavkat Rakhmanov");
+		student.setEmail("rakhmanov.shavkat.@gmail.com");
+		System.out.println(student.getName()+" "+student.getEmail());
+		service2.updateStudent(4L, student);	
+	}
 }

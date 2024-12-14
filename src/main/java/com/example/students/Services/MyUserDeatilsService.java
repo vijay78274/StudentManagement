@@ -22,11 +22,12 @@ public class MyUserDeatilsService implements UserDetailsService{
         if(username.isEmpty()||username==null){
             System.out.println("username is empty");
         }
-        Users user = repository.findByName(username);
+        // Users user = repository.findByName(username);
+        Users user = repository.findByEmail(username);
         if(username.isEmpty()||username==null){
             throw new UsernameNotFoundException("user not found");
         }
-        System.out.println("User found: " + user.getName());
+        System.out.println("User found: " + user.getEmail());
         return new MyUserDetails(user);
     }
 

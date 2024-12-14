@@ -59,14 +59,13 @@ public class SecurityConfig {
         .authorizeHttpRequests(request -> 
             request
                 .requestMatchers("/login", "/css/**", "/js/**").permitAll() 
+                // .requestMatchers("/admin/user").permitAll() 
                 .anyRequest().authenticated() 
         )
         .formLogin(form -> 
             form
                 .loginPage("/login") 
                 .loginProcessingUrl("/perform_login") 
-                // .usernameParameter("name") 
-                // .passwordParameter("password")
                 .defaultSuccessUrl("/public/getall", true) 
                 .failureUrl("/login?error=true") 
                 .permitAll() 

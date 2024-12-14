@@ -5,7 +5,10 @@ import org.springframework.stereotype.Repository;
 
 import com.example.students.Models.Student;
 
+
 @Repository
 public interface StudentRepository extends JpaRepository<Student,Long>{
     // public void findbyName(String name);
+    Student findByEmail(String email);
+    // Student findById(Long id);
 }

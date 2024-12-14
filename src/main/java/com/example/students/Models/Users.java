@@ -9,6 +9,8 @@ public class Users {
     private Long id;
     @Column(name="name")
     private String name;
+    @Column(name="email", unique = true, nullable = false)
+    private String email;
     @Column(name="password")
     private String password;
     @Column(name="role")
@@ -25,6 +27,12 @@ public class Users {
     }
     public void setName(String name) {
         this.name = name;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
     }
     public String getPassword() {
         return password;
