@@ -1,5 +1,7 @@
 package com.example.students.Services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,9 @@ public class UserService {
 
     public Users save(Users user){
         return userRepository.save(user);
+    }
+    public Student getStudentById(Long id) {
+        return studentRepository.findById(id).orElse(null); 
     }
     public void updateStudent(Long id, Student student) {
         Student existingStudent = studentRepository.findById(id)

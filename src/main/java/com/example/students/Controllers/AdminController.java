@@ -1,5 +1,7 @@
 package com.example.students.Controllers;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,7 +13,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -50,9 +51,8 @@ public class AdminController {
         student.setBranch(branch);
         student.setYear(year);
         service.save(student);
-        // String password = name+782;
         String encryptedPassword = passwordEncoder.encode(name+782);
-        Users user = new Users(name,encryptedPassword,"USER");
+        Users user = new Users(name,email,encryptedPassword,"USER");
         userRepository.save(user);
         return "redirect:/admin/getall"; // Redirect to the home page
     }
@@ -71,14 +71,32 @@ public class AdminController {
         Users savedUser = userRepository.save(user);
         return ResponseEntity.ok(savedUser);
     }
+
+    @GetMapping("/update/{id}")
+    public String showUpdateForm(@PathVariable Long id, Model model) {
+        Student student = service2.getStudentById(id);
+        if (student == null) {
+            throw new RuntimeException("Student with ID " + id + " not found");
+        }
+        else
+            System.out.println(student);
+        model.addAttribute("student", student);
+        return "update"; 
+    }
+
     @PutMapping("/update/{id}")
-    public String updateEmployee(@PathVariable Long id, @ModelAttribute Student student) {
-        service2.updateStudent(id,student);
-        return "redirect:/admin/getall";
+    public String updateStudent(@PathVariable Long id, @ModelAttribute Student student) {
+        service2.updateStudent(id, student);
+        return "redirect:/admin/getall"; 
     }
     @DeleteMapping("/{id}")
     public String deleteEmployee(@PathVariable Long id) {
         service2.deleteStudent(id);
         return "Employee with ID " + id + " deleted successfully.";
+    }
+    @DeleteMapping("/delete/{id}")
+    public String deleteStudent(@PathVariable Long id) {
+        service2.deleteStudent(id); 
+        return "redirect:/admin/getall"; 
     }
 }

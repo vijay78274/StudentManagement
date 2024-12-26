@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/css/update.css}" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <div id="update-container" class="update-container">
+        <div class="update-content">
+                <h2>Update Details</h2>
+                <button class="update-close" onclick="window.history.back()">X</button>
+            <form th:action="@{/admin/update/{id}(id=${student.id})}" th:method="post">
+                <input type="hidden" name="_method" value="PUT" />
+                <div class="input-container">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" th:value="${student.name}" placeholder="Enter name">
+                </div>
+                <div class="input-container">
+                    <label for="email">Email:</label>
+                    <input type="text" id="email" name="email" th:value="${student.email}" placeholder="Enter email">
+                </div>
+                <div class="input-container">
+                    <label for="branch">Branch:</label>
+                    <input type="text" id="branch" name="branch" th:value="${student.branch}" placeholder="Enter branch">
+                </div>
+                <div class="input-container">
+                    <label for="year">Year:</label>
+                    <input type="number" id="year" name="year" th:value="${student.year}" placeholder="Enter year">
+                </div>
+                <div class="button-container">
+                    <button class="update-button" type="submit">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

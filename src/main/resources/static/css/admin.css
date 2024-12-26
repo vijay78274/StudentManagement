@@ -46,7 +46,7 @@ button:hover{
     background-color: red;
     transform: scale(1.2);
 }
-.modal, .update-container{
+.modal{
     display: none; /* Hidden by default */
     position: fixed; /* Fixed position */
     top: 0;
@@ -57,7 +57,7 @@ button:hover{
     justify-content: center; /* Center the modal content */
     align-items: center;
 }
-.modal-content, .update-content{
+.modal-content{
     position: relative;
     display: flex;
     flex-direction: column;
@@ -71,7 +71,7 @@ button:hover{
 h2{
     text-align: center;
 }
-.save, .update-button{
+.save{
     border-radius: 5px;
     padding: 5px 10px;
     background-color: blue;
@@ -94,7 +94,7 @@ form{
     display: grid;
     gap: 2px;
 }
-.close,.update-close{
+.close{
     position: absolute; /* Position relative to modal-content */
     top: 10px; /* Distance from the top */
     right: 10px;
